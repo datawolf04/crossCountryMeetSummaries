@@ -1,0 +1,1 @@
+This repository takes results from [MileSplit.com](https://nc.milesplit.com/) and collects the Cross Country Results for the teams in the Big Carolina Conference 6A/7A within NCHSAA.
