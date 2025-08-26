@@ -1,16 +1,36 @@
-# import re
-# import os
-# from openpyxl import load_workbook
+import os
+import re
+from openpyxl import Workbook 
 import pandas as pd
-import scrapeMileSplit
+from scrapeMileSplit import scrapeMileSplit, getMeetID
 
 ##############################################################
-## class for reading results tables and loading them into the database
-class writeMeetToDatabase:
-    def __init__(self, meetID):
-        self.meetID = meetID
+## function for reading results tables and loading them into the database
+def writeMeetToDatabase(url,meetDate,boysRecord,girlsRecord):
+    boysRes = 'meetResultsBoys2025.xlsx'
+    girlsRes = 'meetResultsGirls2025.xlsx'
 
-    def identifyRaceInfo(self,res):
+    def getMeetTitle(url):
+        meetTitle = url.split('https://nc.milesplit.com/meets/')[1].split('/results')[0]
+        meetTitle = re.sub(r'\d+', '', meetTitle).strip('-')
+        return meetTitle
+
+    def writeWB(fName):   
+        # create new excel file
+        df_empty = pd.DataFrame()
+        df_empty.to_excel(fName, sheet_name='MeetIndex')
+
+    def initializeWB():
+        if not os.path.exists(boysRes):
+            writeWB(boysRes)
+        if not os.path.exists(girlsRes):
+            writeWB(girlsRes)
+
+    def inputRaceInfo(raceRes):
+        '''
+        This function allows the user to input race information based on the first few rows of the results.
+        It collects/outputs the gender, level, and race distance
+        '''
         def getGender():
             while True:
                 try:
@@ -42,50 +62,87 @@ class writeMeetToDatabase:
                     print(e)
 
         ## Print the head of the results sheet, enter metadata about race and return it properly formatted.            
-        print(res.head(5))
+        print(raceRes.head(5))
         gender = getGender()
         level = getLevel()
         distance = float(input("Enter race length in km:  "))
         return gender, level, distance
 
-    def getMeetData(self, meeturl, meetID):
-        meetPage = scrapeMileSplit(url=meeturl)
-        tids = meetPage.getTableIDs()
-        return tids
+    def getRaceInfo(res):
+        indivResult = res
+        gender, level, dist = inputRaceInfo(indivResult)
+        return gender, level, dist
 
-    def getRaceTable(self,raceID):
-        indivResult = self.meetPage.getRaceResults(raceID)
-        gender, level, dist = self.identifyRaceInfo(indivResult)
-        raceID = self.meetID + raceID
-        indexEntry = pd.DataFrame({
-            'raceID': raceID, 
-            'gender': gender, 
-            'level': level, 
-            'raceLength': dist})
-        print(indexEntry)
-            # Write raceID, gender, level, distance to race index sheet
-            # Add race result table to new sheet
+    mTitle = getMeetTitle(url)
+    meetID = getMeetID(url, meetDate)
+    meetScrape = scrapeMileSplit(url,meetDate)
+    raceIDs = meetScrape.raceIDs
+    allResults = meetScrape.results
 
+    # Make empty WB if does not exist
+    initializeWB()
 
+    for res, rid in zip(allResults,raceIDs):
+        gen, lev, dist = getRaceInfo(res)
+        mark = res.Mark
+        Time = [(60*float(m.split(':')[0]) + float(m.split(':')[1])) for m in mark]
+        res['Time'] = Time
+
+        # Get correct filename and load the workbook
+        if gen == "Boys":
+            fName = boysRes
+            courseRecord = boysRecord
+        elif gen == "Girls":
+            fName = girlsRes
+            courseRecord = girlsRecord
+
+        raceIndexEntry = pd.DataFrame([[meetID, rid, gen, lev, dist, courseRecord]],
+            columns=['meetID', 'raceID', 'Gender', 'Level', 'Distance', 'Record'])
+        
+        raceSheetName = mTitle + gen + lev
  
-allMeetInfo = pd.read_csv('meetInfo2025.csv')
-toRecord = [p and not r for p,r in zip(allMeetInfo.Posted, allMeetInfo.Recorded)]
+        # Make new sheet and write race results to it.
+        wb = Workbook()
+        with pd.ExcelWriter(fName, engine='openpyxl',mode='a',if_sheet_exists='overlay') as writer:
+            writer.workbook = wb
+            writer.workbook.sheets = dict((ws.title, ws) for ws in wb.worksheets)
+            res.to_excel(writer, sheet_name=raceSheetName,index=False)
 
-meetInfoToRecord = allMeetInfo[toRecord]
-"""
-seasonResults = 'meetResults2025.xlsx'
-if not os.path_exists(seasonResults):
-    writer = pd.ExcelWriter(seasonResults, engine='xlsxwriter')
+            # 'MeetIndex'
+            botRow = writer.sheets['MeetIndex'].max_row
+            isEmpty = botRow < 1.5
+            if isEmpty:
+                raceIndexEntry.to_excel(writer, sheet_name='MeetIndex', index=False, header=True)
+            else:
+                raceIndexEntry.to_excel(writer, sheet_name='MeetIndex', index=False, header=False, startrow=botRow)
 
-for i in range(postedMeets.shape[0]):
-    meetDate, meetLocation, meeturl, meetBoysRecord, meetGirlsRecord, meetPosted, meetRecorded = postedMeets.iloc[i]
-    meetTitle = meeturl.split('https://nc.milesplit.com/meets/')[1].split('/results')[0]
-    meetTitle = re.sub(r'\d+', '', meetTitle).rstrip('-')
-    meetID = "m" + meetDate.strftime("%y%m%d") + meetTitle
+            writer.workbook.save(fName)
 
-"""
+        
 
-""" 
-writer = pd.ExcelWriter("bccResults2025.xlsx", engine='xlsxwriter')
-df1.to_excel(writer, sheet_name='Sheet1', index=False)
-"""
+
+if __name__ == "__main__":
+    from datetime import datetime
+
+    allMeetInfo = pd.read_csv('meetInfo2025.csv')
+    postedMeetInfo = allMeetInfo[allMeetInfo.Posted]
+    boysRes = 'meetResultsBoys2025.xlsx'
+    girlsRes = 'meetResultsGirls2025.xlsx'
+    recordedMeets = []
+    if os.path.exists(boysRes):
+        index = pd.read_excel(boysRes, sheet_name="MeetIndex")
+        recordedMeets = list(set(index.meetID))
+    
+    for m in range(postedMeetInfo.shape[0]):
+        meetDate = datetime.strptime(postedMeetInfo.Date[m],"%Y-%m-%d").date()
+        meetURL = postedMeetInfo.url[m]
+        meetID = getMeetID(meetURL, meetDate)
+        meetBoysRecord = postedMeetInfo.BoysRecord[m]
+        meetGirlsRecord = postedMeetInfo.GirlsRecord[m]
+        if meetID not in recordedMeets:
+            writeMeetToDatabase(meetURL, meetDate, meetBoysRecord, meetGirlsRecord)
+    
+
+
+
+
