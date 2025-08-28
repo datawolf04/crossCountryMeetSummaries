@@ -81,5 +81,4 @@ if __name__ == "__main__":
 
     testURL = 'https://nc.milesplit.com/meets/687737-light-up-the-night-2025/results'
     tstMeetDate = date(2025, 8, 16)
-
     tst = scrapeMileSplit(testURL, tstMeetDate) 

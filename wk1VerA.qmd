@@ -1,0 +1,156 @@
+---
+title: "Big Carolina 6A/7A Conference Cross Country summary"
+author: "Dr. Wolf"
+date: "`r Sys.Date()`"
+format: 
+  html:
+    embed-resources: true
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+
+gender = "Boys"
+
+varsity <- read_csv('meetArchive/threeKilometer/boys/m0816boysVarsity.csv')
+jv <- read_csv('meetArchive/threeKilometer/boys/m0816boysJV.csv')
+
+source('scoreResults.R')
+```
+
+## Boys Competition summary
+All Big Carolina 6A/7A teams (excluding New Bern) competed at the Hwy 24 Light up the night invitational. The JH Rose harriers ran in the JV Race only. The results for the Varsity race are below.
+
+```{r}
+#| layout-ncol: 2
+makePlacePlot(varsity,paste(gender,"Varsity Results"))
+makeTimePlot(varsity,paste(gender,"Varsity Results"))
+```
+
+## D.H. Conley
+
+```{r}
+buildGenderTeamTable(varsity,"D.H. Conley") |> 
+    tab_header(
+      title = "Varsity Race"
+    )
+```
+
+
+## South Central
+
+```{r}
+buildGenderTeamTable(varsity,"South Central") |> 
+    tab_header(
+      title = "Varsity Race"
+    )
+```
+```{r}
+buildGenderTeamTable(jv,"South Central") |> 
+    tab_header(
+      title = "JV Race"
+    )
+```
+
+## New Bern
+No results this week
+
+## J.H. Rose
+```{r}
+buildGenderTeamTable(jv,"Rose, J.H.") |> 
+    tab_header(
+      title = "JV Race"
+    )
+```
+
+## Jacksonville
+```{r}
+buildGenderTeamTable(varsity,"Jacksonville") |> 
+    tab_header(
+      title = "Varsity Race"
+    )
+```
+
+
+```{r}
+buildGenderTeamTable(jv,"Jacksonville") |> 
+    tab_header(
+      title = "JV Race"
+    )
+```
+
+## White Oak
+```{r}
+buildGenderTeamTable(varsity,"White Oak") |> 
+    tab_header(
+      title = "Varsity Race"
+    )
+```
+
+```{r}
+buildGenderTeamTable(jv,"White Oak") |> 
+    tab_header(
+      title = "JV Race"
+    )
+```
+
+## Swansboro
+```{r}
+buildGenderTeamTable(varsity,"Swansboro") |> 
+    tab_header(
+      title = "Varsity Race"
+    )
+```
+
+```{r}
+buildGenderTeamTable(jv,"Swansboro") |> 
+    tab_header(
+      title = "JV Race"
+    )
+```
+
+## BCC Summary
+### All conference this week
+
+```{r}
+allBCCteams <- c("D.H. Conley","South Central","Rose, J.H.","Jacksonville","White Oak",
+        "Swansboro","New Bern")
+allBCCvarsity <- full_join(varsity, jv) |> filter(team %in% allBCCteams)  |> getVarsityRunners()
+
+allConfTable(allBCCvarsity)
+```
+
+### Virtual conference meet score
+This is the result if the conference meet were run with this week's times. Note, that for calculating team scores, runners that are on an incomplete team are removed before calculating team scores. (So the team scores are not necessarily going to be the sum of the first 5 placements for each team.)
+
+```{r}
+scoreMeet(allBCCvarsity,allBCCteams)
+```
+
+```{r}
+#| layout-ncol: 2
+makePlacePlot(allBCCvarsity,paste(gender,"Varsity Results"))
+makeTimePlot(allBCCvarsity,paste(gender,"Varsity Results"))
+```
+
+
+
+## Next week
+According to MileSplit, the [Fightertown Invitational](https://nc.milesplit.com/meets/655522-fightertown-xc-invitational-2025/info) at Havelock HS has the following teams registered:
+
+- D.H. Conley
+- South Central
+- Jacksonville
+- White Oak
+- Swansboro
+- New Bern (Scheduled, not registered)
+
+No meets scheduled on MileSplit:
+
+- J.H. Rose 

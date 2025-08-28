@@ -2,18 +2,18 @@ import os
 import re
 from openpyxl import Workbook 
 import pandas as pd
-from scrapeMileSplit import scrapeMileSplit, getMeetID
+from scrapeMileSplit import scrapeMileSplit
+
+def getMeetTitle(url):
+    meetTitle = url.split('https://nc.milesplit.com/meets/')[1].split('/results')[0]
+    meetTitle = re.sub(r'\d+', '', meetTitle).strip('-')
+    return meetTitle
 
 ##############################################################
 ## function for reading results tables and loading them into the database
 def writeMeetToDatabase(url,meetDate,boysRecord,girlsRecord):
     boysRes = 'meetResultsBoys2025.xlsx'
     girlsRes = 'meetResultsGirls2025.xlsx'
-
-    def getMeetTitle(url):
-        meetTitle = url.split('https://nc.milesplit.com/meets/')[1].split('/results')[0]
-        meetTitle = re.sub(r'\d+', '', meetTitle).strip('-')
-        return meetTitle
 
     def writeWB(fName):   
         # create new excel file
@@ -74,7 +74,6 @@ def writeMeetToDatabase(url,meetDate,boysRecord,girlsRecord):
         return gender, level, dist
 
     mTitle = getMeetTitle(url)
-    meetID = getMeetID(url, meetDate)
     meetScrape = scrapeMileSplit(url,meetDate)
     raceIDs = meetScrape.raceIDs
     allResults = meetScrape.results
@@ -96,11 +95,11 @@ def writeMeetToDatabase(url,meetDate,boysRecord,girlsRecord):
             fName = girlsRes
             courseRecord = girlsRecord
 
-        raceIndexEntry = pd.DataFrame([[meetID, rid, gen, lev, dist, courseRecord]],
-            columns=['meetID', 'raceID', 'Gender', 'Level', 'Distance', 'Record'])
-        
         raceSheetName = mTitle + gen + lev
- 
+        
+        raceIndexEntry = pd.DataFrame([[raceSheetName, mTitle, gen, lev, dist, courseRecord]],
+            columns=['SheetName', 'MeetTitle', 'Gender', 'Level', 'Distance', 'Record'])
+        
         # Make new sheet and write race results to it.
         wb = Workbook()
         with pd.ExcelWriter(fName, engine='openpyxl',mode='a',if_sheet_exists='overlay') as writer:
@@ -131,15 +130,15 @@ if __name__ == "__main__":
     recordedMeets = []
     if os.path.exists(boysRes):
         index = pd.read_excel(boysRes, sheet_name="MeetIndex")
-        recordedMeets = list(set(index.meetID))
+        recordedMeets = list(set(index.MeetTitle))
     
     for m in range(postedMeetInfo.shape[0]):
         meetDate = datetime.strptime(postedMeetInfo.Date[m],"%Y-%m-%d").date()
         meetURL = postedMeetInfo.url[m]
-        meetID = getMeetID(meetURL, meetDate)
+        meetTitle = getMeetTitle(meetURL)
         meetBoysRecord = postedMeetInfo.BoysRecord[m]
         meetGirlsRecord = postedMeetInfo.GirlsRecord[m]
-        if meetID not in recordedMeets:
+        if meetTitle not in recordedMeets:
             writeMeetToDatabase(meetURL, meetDate, meetBoysRecord, meetGirlsRecord)
     
 

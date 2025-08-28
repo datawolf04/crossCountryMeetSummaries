@@ -1,0 +1,201 @@
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+library(grid)
+library(gtable)
+
+
+getScoringTeams <- function(results,minScoring=5){
+  scoringTeams <- results |> group_by(Team) |> summarize(count = n()) |> 
+    filter(count >= minScoring) |> select(Team) |> deframe()
+  return(scoringTeams)
+}
+
+getIncompleteTeams <- function(results,minScoring=5){
+  incTeams <- results |> group_by(Team) |> summarize(count = n()) |> 
+    filter(count < minScoring) |> select(Team) |> deframe()
+  return(incTeams)
+}
+
+getVarsityRunners <- function(results, nVarsity = 7){
+  teamSummary <- results |> group_by(Team) |> summarize(count = n())  
+  team1 <- teamSummary$Team[1]
+  count1 <- teamSummary$count[1]
+  team1Res <- results |> filter(Team == team1) |> arrange(Time)
+  if(count1 > nVarsity){
+    team1Res = team1Res[1:nVarsity, ]
+  }
+  varsityResults <- team1Res
+
+  for(i in 2:nrow(teamSummary)){
+    thisTeam <- teamSummary$Team[i]
+    thisCount <- teamSummary$count[i]
+    thisTeamRes <- results |> filter(Team == thisTeam) |> arrange(Time)
+    if(thisCount > nVarsity){
+      thisTeamRes <- thisTeamRes[1:nVarsity, ]
+    }
+    varsityResults <- bind_rows(list(varsityResults, thisTeamRes))
+  }
+
+  varsityResults <- varsityResults |> arrange(Time) |> 
+    mutate(Place = row_number())
+  return(varsityResults)
+}
+
+getScorers <- function(results, minScoring = 5, maxScoring = 7){
+  scoringTeams = getScoringTeams(results,minScoring = minScoring)
+  scorers <- results |> filter(Team %in% scoringTeams) |> 
+    getVarsityRunners(nVarsity = maxScoring) |> 
+    mutate(Place = row_number())
+  return(scorers)
+}
+
+calcTeamScore <- function(places,count=5){
+    sco = sum(places[1:count])
+    return(sco)
+}
+
+buildTeamResults <- function(results){
+  teamResults <- getScorers(results) |> group_by(Team) |> 
+      summarise(Score = calcTeamScore(Place)) |> 
+      arrange(Score)
+  inc <- getIncompleteTeams(results)
+  teamOrder = c(paste0(teamResults$Team," (",teamResults$Score,")"),paste(inc, "(DNS)"))
+  teamScores = c(teamResults$Score, rep(NA,length(inc)))
+  allTeams = c(teamResults$Team, inc)
+
+  prettyRes = tibble('Team'=allTeams, 'Label'=teamOrder, 'Score'=teamScores) |> 
+      mutate(
+          Score = ifelse(is.na(Score),"DNS",Score)
+      ) 
+  return(prettyRes)
+}
+
+scoreMeet <- function(results,teams,tableTitle,nScore = 5, nVarsity = 7){
+  teamScore <- numeric(length(teams))
+  placements <- character(length(teams))
+  scorers <- results |> getScorers(minScoring = nScore, maxScoring = nVarsity)
+
+  for(i in seq_along(teams)){
+    tm <- teams[i]
+    teamPlaces <- scorers |> filter(Team == tm) |> select(Place) |> deframe()
+    placements[i] <- paste(teamPlaces, collapse= ", ")
+    scoredPlaces <- scorers |> filter(Team == tm) |> select(Place) |> deframe()
+
+    teamScore[i] <- ifelse(length(teamPlaces) >= 5, calcTeamScore(scoredPlaces),
+      ifelse(length(teamPlaces) > 0,"DNS", "NONE"))
+  }
+  teamResults <- data.frame(teams, placements, teamScore) |> arrange(teamScore) |> gt() |>
+    tab_header(title = tableTitle) |> 
+    cols_label(
+      teams = "Teams",
+      placements = "Athlete Placements",
+      teamScore = "Team Score"
+  ) |>  gt_theme_pff()
+  return(teamResults)
+}
+
+makePlacePlot <- function(results,pltTitle){
+  teamRes = buildTeamResults(results = results) |> select(Team, Label)
+  results <- results |> left_join(teamRes, by='Team') |> 
+    mutate(Team = Label) |> select(-Label) 
+  results <- results |> 
+    mutate(Team = factor(results$Team, levels = teamRes$Label))
+
+  ggplot(results, aes(x=Place,y=Team,color=Team)) + 
+    geom_point(size=4) + guides(color = "none") + 
+    scale_y_discrete(limits=rev) +
+    theme_minimal() + theme(axis.title.y = element_blank()) +
+    ggtitle(pltTitle) + xlab("Place in race")
+}
+
+
+makeTimePlot <- function(results,pltTitle){
+  teamRes = buildTeamResults(results = results) |> select(Team, Label)
+  results <- results |> left_join(teamRes, by='Team') |> 
+    mutate(Team = Label) |> select(-Label) 
+  results <- results |> 
+    mutate(Team = factor(results$Team, levels = teamRes$Label))
+
+  p1 <- ggplot(results, aes(x=Time,y=Team,color=Team)) + 
+    geom_point(size = 2) + guides(color = "none") + 
+    scale_y_discrete(
+      limits=rev
+    ) +
+    theme_minimal() + theme(axis.title.y = element_blank()) +
+    ggtitle(pltTitle) + xlab("Time") +
+    scale_x_time(labels = \(x) format(as_datetime(x, tz = "UTC"), "%M:%S"))
+
+  p2 <- ggplot(meetResults, aes(x=Time)) + geom_density(fill = "skyblue", alpha = 0.25) +
+    theme_minimal() + ylab("") + scale_y_continuous(labels=NULL) +
+    scale_x_time(labels = \(x) format(as_datetime(x, tz = "UTC"), "%M:%S"))
+  
+  g1 <- ggplotGrob(p1)
+  g2 <- ggplotGrob(p2)
+  g <- rbind(g1, g2, size = "first")
+  panel_rows <- unique(g$layout[g$layout$name == "panel", "t"])
+  g$heights[panel_rows] <- unit(c(5, 1), "null")
+  grid.newpage()
+  
+  return(grid.draw(g))
+}
+
+buildTeamTable <- function(results, thisTeam){
+  rawTab <- results |> filter(Team==thisTeam) |> 
+    select(Athlete, Mark) 
+
+  if(nrow(rawTab) < 7){
+    nAdd <- 7 - nrow(rawTab)
+    for(i in 1:nAdd){
+      rawTab <- rawTab |> add_row(Athlete = NA, Mark = NA)
+    }
+  } else {
+    rawTab <- rawTab[1:7, ]
+  }
+
+  teamTab <- rawTab |> rename(time = Mark) |> gt() |> 
+    cols_label(Athlete = "Athlete", time = "Time") |> 
+    sub_missing(columns = everything(), missing_text = "") |> 
+    gt_theme_pff() |> 
+    tab_style(
+        style = cell_borders(
+          sides = "bottom",
+          color = "grey",
+          weight = px(2),
+          style = "dashed"
+        ),
+        locations = cells_body(rows = 5)
+    ) 
+  return(teamTab)
+}
+
+#######################################################
+# NOT RUN:
+# 
+# fName <- "meetResultsBoys2025.xlsx"
+# meetIndex <- read_excel(fName, sheet = "MeetIndex")
+# meet <- meetIndex[4, ]
+# sheetName <- meet$SheetName
+# meetResults <- read_excel(fName, sheet = sheetName) |> mutate(Place = as.integer(Place))
+# buildTeamResults(meetResults)
+# meetTitle = meet$MeetTitle |> str_replace_all('-', ' ') |> str_to_title() |> str_replace(" Xc ", " XC ")
+# raceTitle = paste(meetTitle, meet$Gender, meet$Level)
+# scoreMeet(meetResults,getScoringTeams(meetResults),raceTitle)
+# makePlacePlot(meetResults, raceTitle)
+# makeTimePlot(meetResults,raceTitle)
+# buildTeamTable(meetResults, "D.H. Conley")
+############################################
+
+# allConfTable = function(res){
+#   allConf = res[1:14, ] |> 
+#     mutate(
+#       tt = c(rep("First",7), rep("Second", 7))
+#     ) |> 
+#     select(name, team, tt, timeStr) |> group_by(tt) |> gt() |> 
+#     cols_label(name = "Athlete", team = "School", timeStr="Time") |> 
+#     gt_theme_pff()
+
+#   return(allConf)
+# }
+
