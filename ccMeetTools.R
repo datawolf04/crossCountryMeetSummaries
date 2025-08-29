@@ -92,7 +92,7 @@ scoreMeet <- function(results,teams,tableTitle,nScore = 5, nVarsity = 7){
       teams = "Teams",
       placements = "Athlete Placements",
       teamScore = "Team Score"
-  ) |>  gt_theme_pff()
+    ) |>  gt_theme_pff() 
   return(teamResults)
 }
 
@@ -112,6 +112,7 @@ makePlacePlot <- function(results,pltTitle){
 
 
 makeTimePlot <- function(results,pltTitle){
+  pltTitle = paste(pltTitle, "Team times")
   teamRes = buildTeamResults(results = results) |> select(Team, Label)
   results <- results |> left_join(teamRes, by='Team') |> 
     mutate(Team = Label) |> select(-Label) 
@@ -123,13 +124,29 @@ makeTimePlot <- function(results,pltTitle){
     scale_y_discrete(
       limits=rev
     ) +
-    theme_minimal() + theme(axis.title.y = element_blank()) +
-    ggtitle(pltTitle) + xlab("Time") +
+    theme_minimal() + labs(
+      title = pltTitle,
+      subtitle = "Varsity times by team",
+      x = "",
+      y = ""
+    ) + 
+    theme( plot.title.position = "plot", plot.subtitle = element_text(hjust = 0.5) ) +
     scale_x_time(labels = \(x) format(as_datetime(x, tz = "UTC"), "%M:%S"))
 
-  p2 <- ggplot(meetResults, aes(x=Time)) + geom_density(fill = "skyblue", alpha = 0.25) +
-    theme_minimal() + ylab("") + scale_y_continuous(labels=NULL) +
-    scale_x_time(labels = \(x) format(as_datetime(x, tz = "UTC"), "%M:%S"))
+  medTime = median(results$Time)
+  maxDensity = max(density(results$Time)$y)
+  medTimeStr = format(as_datetime(medTime, tz = "UTC"), "%M:%OS2")
+  p2 <- ggplot(results, aes(x=Time)) + geom_density(fill = "skyblue", alpha = 0.25) +
+    geom_vline(xintercept=medTime, linetype = "dashed", color='blue',linewidth=0.5) +
+    theme_minimal() + scale_y_continuous(labels=NULL) +
+    theme( plot.title.position = "plot", plot.subtitle = element_text(hjust = 0.2)) +
+    labs(
+      y="",
+      subtitle = "Time distribution for all varsity athletes" 
+    ) +
+    annotate("text", x = medTime+60, y = maxDensity*0.9, hjust = 0,
+      label = paste("Median:",medTimeStr), color = 'blue', size= 3) +
+    scale_x_time(labels = \(x) format(as_datetime(x, tz = "UTC"), "%M:%S")) 
   
   g1 <- ggplotGrob(p1)
   g2 <- ggplotGrob(p2)
@@ -141,23 +158,33 @@ makeTimePlot <- function(results,pltTitle){
   return(grid.draw(g))
 }
 
-buildTeamTable <- function(results, thisTeam){
+buildTeamTable <- function(results, thisTeam, maxAth = 7){
   rawTab <- results |> filter(Team==thisTeam) |> 
     select(Athlete, Mark) 
 
-  if(nrow(rawTab) < 7){
-    nAdd <- 7 - nrow(rawTab)
+  if(nrow(rawTab) < maxAth){
+    nAdd <- maxAth - nrow(rawTab)
     for(i in 1:nAdd){
       rawTab <- rawTab |> add_row(Athlete = NA, Mark = NA)
     }
   } else {
-    rawTab <- rawTab[1:7, ]
+    rawTab <- rawTab[1:maxAth, ]
+  }
+
+  dashrows <- function(x){
+    if(x>7){
+      r = c(5,7)
+    } else {
+      r = 5
+    }
+    return(r)
   }
 
   teamTab <- rawTab |> rename(time = Mark) |> gt() |> 
     cols_label(Athlete = "Athlete", time = "Time") |> 
     sub_missing(columns = everything(), missing_text = "") |> 
     gt_theme_pff() |> 
+    cols_align(align='center', columns='time') |> 
     tab_style(
         style = cell_borders(
           sides = "bottom",
@@ -165,7 +192,7 @@ buildTeamTable <- function(results, thisTeam){
           weight = px(2),
           style = "dashed"
         ),
-        locations = cells_body(rows = 5)
+        locations = cells_body(rows = dashrows(maxAth))
     ) 
   return(teamTab)
 }

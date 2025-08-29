@@ -1,0 +1,5 @@
+---
+title: "About"
+---
+
+I'm just a Dad who likes data and cross country, and I'm happy my kids are running. This is a way that I can engage with them about this sport that I love. All results for this site have been scraped from [MileSplit.com](https://nc.milesplit.com). I will be pointing back to the race sites to properly credit MileSplit and the schools who are using that resource to host their meet information.
