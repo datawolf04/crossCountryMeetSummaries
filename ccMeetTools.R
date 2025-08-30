@@ -5,6 +5,30 @@ library(readxl)
 library(grid)
 library(gtable)
 
+gt_cc_table <- function(tbl_dat) {
+  tbl_dat |> gt() |> 
+    tab_options(
+      quarto.use_bootstrap = TRUE, # Enable Bootstrap classes
+      heading.background.color = 'darkgrey',
+      column_labels.background.color = 'darkgrey',
+      table.font.color = '#004d66'
+    ) |> 
+    tab_style(
+      style = cell_fill(color = "skyblue", alpha=0.25), # Choose your desired color
+      locations = cells_body(rows = seq(1, nrow(tbl_dat), 2))
+    )
+}
+
+getFileName <-function(gender){
+  fName <- ifelse(gender == "Boys", "../../resources/meetResultsBoys2025.xlsx", 
+      ifelse(gender == "Girls", "../../resources/meetResultsGirls2025.xlsx", NA))
+  return(fName)
+} 
+
+getSheetName <- function(meetID,gender,level){
+  sheetName <- paste0(meetID,gender,level)
+  return(sheetName)
+}
 
 getScoringTeams <- function(results,minScoring=5){
   scoringTeams <- results |> group_by(Team) |> summarize(count = n()) |> 
@@ -72,7 +96,10 @@ buildTeamResults <- function(results){
   return(prettyRes)
 }
 
-scoreMeet <- function(results,teams,tableTitle,nScore = 5, nVarsity = 7){
+scoreMeet <- function(results, meetID, meetGender, meetLevel,nScore = 5, nVarsity = 7){
+  teams <- getScoringTeams(results)
+  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> str_replace(" Xc ", " XC ")
+  tableTitle = paste(meetTitle, meetGender, meetLevel)
   teamScore <- numeric(length(teams))
   placements <- character(length(teams))
   scorers <- results |> getScorers(minScoring = nScore, maxScoring = nVarsity)
@@ -86,32 +113,40 @@ scoreMeet <- function(results,teams,tableTitle,nScore = 5, nVarsity = 7){
     teamScore[i] <- ifelse(length(teamPlaces) >= 5, calcTeamScore(scoredPlaces),
       ifelse(length(teamPlaces) > 0,"DNS", "NONE"))
   }
-  teamResults <- data.frame(teams, placements, teamScore) |> arrange(teamScore) |> gt() |>
+  teamResults <- data.frame(teams, placements, teamScore) |> arrange(teamScore) |> 
+    gt_cc_table() |>
     tab_header(title = tableTitle) |> 
     cols_label(
       teams = "Teams",
       placements = "Athlete Placements",
       teamScore = "Team Score"
-    ) |>  gt_theme_pff() 
+    ) 
   return(teamResults)
 }
 
-makePlacePlot <- function(results,pltTitle){
+makePlacePlot <- function(results, meetID, meetGender, meetLevel){
+  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> str_replace(" Xc ", " XC ")
+  pltTitle = paste(meetTitle, meetGender, meetLevel)
   teamRes = buildTeamResults(results = results) |> select(Team, Label)
   results <- results |> left_join(teamRes, by='Team') |> 
     mutate(Team = Label) |> select(-Label) 
   results <- results |> 
-    mutate(Team = factor(results$Team, levels = teamRes$Label))
+    mutate(
+      Team = factor(results$Team, levels = teamRes$Label),
+      Place = as.integer(Place)
+    )
 
   ggplot(results, aes(x=Place,y=Team,color=Team)) + 
-    geom_point(size=4) + guides(color = "none") + 
+    geom_point(size=2) + guides(color = "none") + 
     scale_y_discrete(limits=rev) +
     theme_minimal() + theme(axis.title.y = element_blank()) +
     ggtitle(pltTitle) + xlab("Place in race")
 }
 
 
-makeTimePlot <- function(results,pltTitle){
+makeTimePlot <- function(results, meetID, meetGender, meetLevel){
+  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> str_replace(" Xc ", " XC ")
+  pltTitle = paste(meetTitle, meetGender, meetLevel)
   pltTitle = paste(pltTitle, "Team times")
   teamRes = buildTeamResults(results = results) |> select(Team, Label)
   results <- results |> left_join(teamRes, by='Team') |> 
@@ -139,7 +174,12 @@ makeTimePlot <- function(results,pltTitle){
   p2 <- ggplot(results, aes(x=Time)) + geom_density(fill = "skyblue", alpha = 0.25) +
     geom_vline(xintercept=medTime, linetype = "dashed", color='blue',linewidth=0.5) +
     theme_minimal() + scale_y_continuous(labels=NULL) +
-    theme( plot.title.position = "plot", plot.subtitle = element_text(hjust = 0.2)) +
+    theme( 
+      plot.title.position = "plot", 
+      plot.subtitle = element_text(hjust = 0.2),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank()
+  ) +
     labs(
       y="",
       subtitle = "Time distribution for all varsity athletes" 
@@ -180,10 +220,9 @@ buildTeamTable <- function(results, thisTeam, maxAth = 7){
     return(r)
   }
 
-  teamTab <- rawTab |> rename(time = Mark) |> gt() |> 
+  teamTab <- rawTab |> rename(time = Mark) |> gt_cc_table() |> 
     cols_label(Athlete = "Athlete", time = "Time") |> 
     sub_missing(columns = everything(), missing_text = "") |> 
-    gt_theme_pff() |> 
     cols_align(align='center', columns='time') |> 
     tab_style(
         style = cell_borders(
@@ -202,7 +241,7 @@ buildTeamTable <- function(results, thisTeam, maxAth = 7){
 # 
 # fName <- "meetResultsBoys2025.xlsx"
 # meetIndex <- read_excel(fName, sheet = "MeetIndex")
-# meet <- meetIndex[4, ]
+# meet <- meetIndex[2, ]
 # sheetName <- meet$SheetName
 # meetResults <- read_excel(fName, sheet = sheetName) |> mutate(Place = as.integer(Place))
 # buildTeamResults(meetResults)

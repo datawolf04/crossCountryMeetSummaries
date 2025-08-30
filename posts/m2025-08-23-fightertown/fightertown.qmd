@@ -1,0 +1,67 @@
+---
+title: "Fightertown Invitational"
+description: "First 5K of the season."
+date: "08/23/2025"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+
+source('../../ccMeetTools.R')
+meetID <- 'fightertown-xc-invitational'
+boysResults <- getFileName("Boys")
+boysVarsity <- read_excel(boysResults, sheet=getSheetName(meetID,"Boys","Varsity"))
+boysJV <- read_excel(boysResults, sheet=getSheetName(meetID,"Boys","JV"))
+girlsResults <- getFileName("Girls")
+girlsVarsity <- read_excel(girlsResults, sheet=getSheetName(meetID,"Girls","Varsity"))
+girlsJV <- read_excel(girlsResults, sheet=getSheetName(meetID,"Girls","JV"))
+```
+
+## Competition summary
+The course was flat and fast, and the weather was great, clear and warm, but not too hot. Jacksonville and White Oak were the only teams from our league that we saw here.
+
+### D.H. Conley Athlete times
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley",maxAth=9)
+buildTeamTable(girlsVarsity, "D.H. Conley")
+```
+
+### Boys
+```{r}
+scoreMeet(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+### Girls
+```{r}
+scoreMeet(girlsVarsity, meetID, "Girls", "Varsity")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(girlsVarsity, meetID, "Girls", "Varsity")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(girlsVarsity, meetID, "Girls", "Varsity")
+```

@@ -1,0 +1,21 @@
+project:
+  type: website
+
+website:
+  title: "Cross Country Meet Summaries"
+  navbar:
+    background: primary
+    right:
+      - about.qmd
+    logo: eatSleepRun.png
+  draft-mode: visible
+
+format:
+  html:
+    theme:
+      - sketchy
+      - brand
+      - custom-theme.scss
+    css: styles.css
+
+

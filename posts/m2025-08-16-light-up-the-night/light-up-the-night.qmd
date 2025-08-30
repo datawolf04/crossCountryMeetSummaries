@@ -1,0 +1,69 @@
+---
+title: "Light Up The Night"
+description: "First meet of the HS season, a flat, fast, 3K."
+date: "08/16/2025"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+
+source('../../ccMeetTools.R')
+meetID <- 'light-up-the-night'
+boysResults <- getFileName("Boys")
+boysVarsity <- read_excel(boysResults, sheet=getSheetName(meetID,"Boys","Varsity"))
+boysJV <- read_excel(boysResults, sheet=getSheetName(meetID,"Boys","JV"))
+girlsResults <- getFileName("Girls")
+girlsVarsity <- read_excel(girlsResults, sheet=getSheetName(meetID,"Girls","Varsity"))
+girlsJV <- read_excel(girlsResults, sheet=getSheetName(meetID,"Girls","JV"))
+```
+
+## Competition summary
+All Big Carolina 6A/7A teams (excluding New Bern) competed at the Hwy 24 Light up the night invitational. The JH Rose boys harriers ran in the JV Race only. The results for the Varsity races are below.
+
+### D.H. Conley Athlete times
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley")
+buildTeamTable(girlsVarsity, "D.H. Conley")
+```
+
+### Boys Team results
+```{r}
+scoreMeet(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+These figures are something that I've created to help visualize the results. The top figure shows the athlete placements. So the dot representing the 2nd and 3rd place runner have the same horizontal separation as the horizontal separation between the 22nd and 23rd runners regardless of the time between them.
+
+```{r}
+#| fig-height: 4
+makePlacePlot(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+```{r}
+#| fig-height: 5
+makeTimePlot(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+### Girls Team results
+```{r}
+scoreMeet(girlsVarsity, meetID, "Girls", "Varsity")
+```
+
+```{r}
+#| fig-height: 4
+makePlacePlot(girlsVarsity, meetID, "Girls", "Varsity")
+```
+
+```{r}
+#| fig-height: 5
+makeTimePlot(girlsVarsity, meetID, "Girls", "Varsity")
+```
