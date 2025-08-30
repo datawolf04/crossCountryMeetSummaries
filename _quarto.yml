@@ -18,4 +18,7 @@ format:
       - custom-theme.scss
     css: styles.css
 
+execute:
+  freeze: auto
+
 
