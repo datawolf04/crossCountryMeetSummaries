@@ -6,7 +6,10 @@ website:
   navbar:
     background: primary
     right:
-      - about.qmd
+      - href: about.qmd
+        text: About 
+      - href: https://datawolf04.github.io
+        text: DataWorld
     logo: eatSleepRun.png
   draft-mode: visible
 
