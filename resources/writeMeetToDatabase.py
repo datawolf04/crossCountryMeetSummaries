@@ -124,7 +124,7 @@ if __name__ == "__main__":
     from datetime import datetime
 
     allMeetInfo = pd.read_csv('meetInfo2025.csv')
-    postedMeetInfo = allMeetInfo[allMeetInfo.Formatted]
+    postedMeetInfo = allMeetInfo[allMeetInfo.Formatted].reset_index()
     boysRes = 'meetResultsBoys2025.xlsx'
     girlsRes = 'meetResultsGirls2025.xlsx'
     recordedMeets = []

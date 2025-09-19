@@ -1,0 +1,84 @@
+---
+title: "Pirate Invitational"
+description: "Invitational at ECU's North Recreational Campus."
+date: "09/13/2025"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+meetID = 'pirate-XC-invite'
+boysChamp = read_excel('../../resources/pirate-XC-invite.xlsx', sheet = "Boys Championship") |> 
+  arrange(Time)
+boysInvite = read_excel('../../resources/pirate-XC-invite.xlsx', sheet = "Boys Invitational") |> 
+  arrange(Time)
+girlsChamp = read_excel('../../resources/pirate-XC-invite.xlsx', sheet = "Girls Championship") |> 
+  arrange(Time)
+```
+
+## Competition summary
+The course was a flat and fast single loop. The weather was great, clear and warm, but not too hot. South Central and Rose were the only teams from our league that we saw here.
+
+### D.H. Conley Athlete times
+```{r}
+buildTeamTable(boysChamp, "D.H. Conley",maxAth = 10)
+buildTeamTable(boysInvite, "D.H. Conley")
+buildTeamTable(girlsChamp, "D.H. Conley",maxAth = 7)
+```
+
+### Boys Championship
+```{r}
+scoreMeet(boysChamp, meetID, "Boys", "Championship")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(boysChamp, meetID, "Boys", "Championship")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(boysChamp, meetID, "Boys", "Championship")
+```
+
+### Boys Invitational
+```{r}
+scoreMeet(boysInvite, meetID, "Boys", "Invitational")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(boysInvite, meetID, "Boys", "Invitational")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(boysInvite, meetID, "Boys", "Invitational")
+```
+
+### Girls
+```{r}
+scoreMeet(girlsChamp, meetID, "Girls", "Championship")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(girlsChamp, meetID, "Girls", "Championship")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(girlsChamp, meetID, "Girls", "Championship")
+```
