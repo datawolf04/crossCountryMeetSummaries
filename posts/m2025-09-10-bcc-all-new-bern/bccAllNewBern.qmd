@@ -1,5 +1,5 @@
 ---
-title: "BCC Round Up @ New Bern"
+title: "BCC Round Up at New Bern"
 description: "A short 5K"
 date: "09/10/2025"
 categories:
