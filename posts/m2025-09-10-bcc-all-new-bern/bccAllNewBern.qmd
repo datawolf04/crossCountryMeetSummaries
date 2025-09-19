@@ -1,0 +1,67 @@
+---
+title: "BCC Round Up @ New Bern"
+description: "A short 5K"
+date: "09/10/2025"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+
+source('../../ccMeetTools.R')
+meetID <- 'bcc-round-up-new-bern-all-teams'
+boysResults <- getFileName("Boys")
+#boysResults <- 'resources/meetResultsBoys2025.xlsx'
+boysVarsity <- read_excel(boysResults, sheet=getSheetName(meetID,"Boys","Varsity"))
+girlsResults <- getFileName("Girls")
+#girlsResults <- 'resources/meetResultsGirls2025.xlsx'
+girlsVarsity <- read_excel(girlsResults, sheet=getSheetName(meetID,"Girls","Varsity"))
+```
+
+## Competition summary
+The course was flat and fast, and the weather was great, clear and warm, but not too hot. The New Bern course is likely only about 4800m.
+
+### D.H. Conley Athlete times
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley",maxAth=16)
+buildTeamTable(girlsVarsity, "D.H. Conley",maxAth=9)
+```
+
+### Boys
+```{r}
+scoreMeet(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+### Girls
+```{r}
+scoreMeet(girlsVarsity, meetID, "Girls", "Varsity")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(girlsVarsity, meetID, "Girls", "Varsity")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(girlsVarsity, meetID, "Girls", "Varsity")
+```

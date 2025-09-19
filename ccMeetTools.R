@@ -86,8 +86,15 @@ buildTeamResults <- function(results){
       arrange(Score)
   inc <- getIncompleteTeams(results)
   teamOrder = c(paste0(teamResults$Team," (",teamResults$Score,")"),paste(inc, "(DNS)"))
-  teamScores = c(teamResults$Score, rep(NA,length(inc)))
-  allTeams = c(teamResults$Team, inc)
+  if (identical(inc, character(0))){
+    teamOrder = paste0(teamResults$Team," (",teamResults$Score,")")
+    teamScores = teamResults$Score
+    allTeams = teamResults$Team
+  } else {
+    teamOrder = c(paste0(teamResults$Team," (",teamResults$Score,")"),paste(inc, "(DNS)"))
+    teamScores = c(teamResults$Score, rep(NA,length(inc)))
+    allTeams = c(teamResults$Team, inc)
+  }
 
   prettyRes = tibble('Team'=allTeams, 'Label'=teamOrder, 'Score'=teamScores) |> 
       mutate(
