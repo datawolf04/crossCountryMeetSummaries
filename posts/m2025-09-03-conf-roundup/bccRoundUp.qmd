@@ -1,0 +1,66 @@
+---
+title: "BCC Conference Kickoff"
+description: "Starting off the Big Carolina Conference in 2025"
+date: "09/03/2025"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+
+meetID <- 'bcc-conf-kickoff'
+# source('ccMeetTools.R')
+# boysVarsity <- read_excel('resources/conference-kickoff.xlsx', sheet="Boys")
+# girlsVarsity <- read_excel('resources/conference-kickoff.xlsx', sheet="Girls")
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('../../resources/conference-kickoff.xlsx', sheet="Boys")
+girlsVarsity <- read_excel('../../resources/conference-kickoff.xlsx', sheet="Girls")
+```
+
+## Competition summary
+The course had a few more hills than typical ENC fare. Note: all spelling mistakes are from MileSplit.
+
+### D.H. Conley Athlete times
+```{r}
+buildTeamTable(boysVarsity, "DHC",maxAth=14)
+buildTeamTable(girlsVarsity, "DHC",maxAth=9)
+```
+
+### Boys
+```{r}
+scoreMeet(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(boysVarsity, meetID, "Boys", "Varsity")
+```
+
+### Girls
+```{r}
+scoreMeet(girlsVarsity, meetID, "Girls", "Varsity")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(girlsVarsity, meetID, "Girls", "Varsity")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(girlsVarsity, meetID, "Girls", "Varsity")
+```
