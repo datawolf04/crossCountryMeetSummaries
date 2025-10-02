@@ -1,0 +1,66 @@
+---
+title: "Bo Run"
+description: "The 2025 edition of the Bo Run."
+date: "09/27/2025"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+meetID = 'bo-run'
+boysResults <- getFileName("Boys")
+girlsResults <- getFileName("Girls")
+boysVarsity <- read_excel(boysResults, sheet=getSheetName(meetID,"Boys","Varsity"))
+girlsVarsity <- read_excel(girlsResults, sheet=getSheetName(meetID,"Girls","Varsity"))
+```
+
+## Competition summary
+It was a great day. The sun was out and the squirrels were collecting acorns for the winter. Teams from all over came to run here. Despite the fact that there were separate championship/open races, the results on MileSplit combined the results. So I'll do the same.
+
+### D.H. Conley Athlete times
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley",maxAth = 15)
+buildTeamTable(girlsVarsity, "D.H. Conley",maxAth = 8)
+```
+
+### Boys Races
+```{r}
+scoreMeet(boysVarsity, meetID, "Boys", "Championship")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(boysVarsity, meetID, "Boys", "Championship")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(boysVarsity, meetID, "Boys", "Championship")
+```
+
+### Girls Races
+```{r}
+scoreMeet(girlsVarsity, meetID, "Girls", "Championship")
+```
+
+```{r}
+#| fig-height: 5
+makePlacePlot(girlsVarsity, meetID, "Girls", "Championship")
+```
+
+```{r}
+#| fig-height: 6.5
+makeTimePlot(girlsVarsity, meetID, "Girls", "Championship")
+```

@@ -105,7 +105,8 @@ buildTeamResults <- function(results){
 
 scoreMeet <- function(results, meetID, meetGender, meetLevel,nScore = 5, nVarsity = 7){
   teams <- getScoringTeams(results)
-  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> str_replace(" Xc ", " XC ")
+  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> 
+    str_replace(" Xc ", " XC ") |> str_replace("Bcc", "BCC")
   tableTitle = paste(meetTitle, meetGender, meetLevel)
   teamScore <- numeric(length(teams))
   placements <- character(length(teams))
@@ -132,7 +133,8 @@ scoreMeet <- function(results, meetID, meetGender, meetLevel,nScore = 5, nVarsit
 }
 
 makePlacePlot <- function(results, meetID, meetGender, meetLevel){
-  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> str_replace(" Xc ", " XC ")
+  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> 
+    str_replace(" Xc ", " XC ") |> str_replace("Bcc", "BCC")
   pltTitle = paste(meetTitle, meetGender, meetLevel)
   teamRes = buildTeamResults(results = results) |> select(Team, Label)
   results <- results |> left_join(teamRes, by='Team') |> 
@@ -152,7 +154,8 @@ makePlacePlot <- function(results, meetID, meetGender, meetLevel){
 
 
 makeTimePlot <- function(results, meetID, meetGender, meetLevel){
-  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> str_replace(" Xc ", " XC ")
+  meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> 
+    str_replace(" Xc ", " XC ") |> str_replace("Bcc", "BCC")
   pltTitle = paste(meetTitle, meetGender, meetLevel)
   pltTitle = paste(pltTitle, "Team times")
   teamRes = buildTeamResults(results = results) |> select(Team, Label)

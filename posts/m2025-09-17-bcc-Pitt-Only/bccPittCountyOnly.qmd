@@ -1,7 +1,7 @@
 ---
-title: "BCC Round Up at New Bern"
-description: "A short 5K"
-date: "09/10/2025"
+title: "BCC Pitt County Schools Only"
+description: "The unofficial county meet at Boyd Lee Park"
+date: "09/17/2025"
 categories:
   - HighSchool
   - BCC
@@ -19,22 +19,20 @@ library(gt)
 library(gtExtras)
 
 source('../../ccMeetTools.R')
-meetID <- 'bcc-round-up-new-bern-all-teams'
-boysResults <- getFileName("Boys")
-#boysResults <- 'resources/meetResultsBoys2025.xlsx'
-boysVarsity <- read_excel(boysResults, sheet=getSheetName(meetID,"Boys","Varsity"))
-girlsResults <- getFileName("Girls")
-#girlsResults <- 'resources/meetResultsGirls2025.xlsx'
-girlsVarsity <- read_excel(girlsResults, sheet=getSheetName(meetID,"Girls","Varsity"))
+meetID <- 'bcc-pitt-county'
+boysResults <- '../../resources/bcc-pitt-only-09-17.xlsx'
+boysVarsity <- read_excel(boysResults, sheet="Boys")
+girlsResults <- '../../resources/bcc-pitt-only-09-17.xlsx'
+girlsVarsity <- read_excel(girlsResults, sheet="Girls")
 ```
 
 ## Competition summary
-The course was flat and fast, and the weather was great, clear and warm, but not too hot. The New Bern course is likely only about 4800m.
+This is the home course. 
 
 ### D.H. Conley Athlete times
 ```{r}
-buildTeamTable(boysVarsity, "D.H. Conley",maxAth=16)
-buildTeamTable(girlsVarsity, "D.H. Conley",maxAth=9)
+buildTeamTable(boysVarsity, "DH Conley",maxAth=13)
+buildTeamTable(girlsVarsity, "DH Conley",maxAth=9)
 ```
 
 ### Boys
