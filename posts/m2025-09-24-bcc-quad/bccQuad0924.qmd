@@ -4,6 +4,7 @@ description: "A hot day in the Big Carolina Conference at NE Creek Park"
 date: "09/24/2025"
 categories:
   - HighSchool
+  - BCC
 format: 
   html
 execute:

@@ -4,6 +4,7 @@ description: "Home course"
 date: "10/01/2025"
 categories:
   - HighSchool
+  - BCC
 format: 
   html
 execute:
@@ -21,7 +22,7 @@ source('../../ccMeetTools.R')
 meetID <- 'bcc-round-up-boyd-lee-all-teams'
 boysResults <- getFileName("Boys")
 girlsResults <- getFileName("Girls")
-boysVarsity <- read_excel(boysResults, sheet=getSheetName(meetID,"Boys","Varsity"))
+boysVarsity <- read_excel(boysResults, sheet='bcc-round-up-boyd-lee-all-teams')
 girlsVarsity <- read_excel(girlsResults, sheet=getSheetName(meetID,"Girls","Varsity"))
 ```
 
