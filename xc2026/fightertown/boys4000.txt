@@ -1,0 +1,58 @@
+PLACE ATHLETE TEAM MARK POINTS
+1 Dominic DiPasqua FR Havelock 14:48.89 1
+2 Jaymes Jimenez JR Croatan 15:12.79 2
+3 Mac Hawkins JR Croatan 15:20.60 3
+4 Ethan Senarathne FR D.H. Conley 15:21.28
+5 Mason Smith SR East Carteret 15:31.48
+6 Steven Mummaw JR Croatan 15:50.98 4
+7 Jonathan Mills FR D.H. Conley 15:56.12
+8 Noah Fisher FR West Carteret 16:03.42 5
+9 Shore Taylor SO West Carteret 16:21.11 6
+10 Garrett Robinson SO East Carteret 16:21.39
+11 Matthew Riverbank FR D.H. Conley 16:22.00
+12 Karter Scanlon SO Swansboro 16:27.01 7
+13 Liam Eisenacher FR Swansboro 16:30.63 8
+14 Anderson Hardee FR West Carteret 16:31.66 9
+15 Brandon Bowen SO Croatan 16:40.42 10
+16 Paul Vee SO Swansboro 16:40.83 11
+17 Jacob Johnston SO Croatan 16:48.33 12
+18 Gavin Thorsby FR Unattached NC 17:00.83
+19 Gabriel Hare FR Swansboro 17:23.55 13
+20 Izak Carben FR Havelock 17:31.37 14
+21 William Anjal FR Havelock 17:33.62 15
+22 Alfredo Limon Howard SO South Lenoir 17:34.23
+23 Ian Gorsuch FR Havelock 17:35.02 16
+24 Chase Oliver FR Croatan 17:37.81 17
+25 Cole Kunze SO Swansboro 17:38.67 18
+26 Oakley Steele FR Havelock 17:39.82 19
+27 Patrick Driscoll FR Havelock 17:47.17 20
+28 Dominic Howell FR Havelock 18:16.06 21
+29 Chase Murphy JR Croatan 18:29.16 22
+30 Garrett Davis FR West Carteret 18:29.48 23
+31 Colin Taylor FR Croatan 18:29.75
+32 Alex Montgomery JR West Carteret 18:34.52 24
+33 Tristan Smith FR Havelock 18:36.83
+34 Jackson Parrish SO D.H. Conley 19:06.50
+35 Lucas Jiang JR West Carteret 19:17.26 25
+36 Grant Mallady FR Havelock 19:26.77
+37 Emanuel Ayala SO South Lenoir 19:31.68
+38 Nathan Sugg FR West Carteret 19:33.68 26
+39 Daniel Boarman FR Swansboro 19:47.29 27
+40 Eli McKim FR Swansboro 20:20.67 28
+41 Gabriel Thorsby FR Unattached NC 20:36.16
+42 Jack Walsh FR Jacksonville 21:24.00
+43 Eddie Soriano JR White Oak 21:30.25
+44 Christopher Saenz JR White Oak 21:45.01
+45 Doland Willis SO West Carteret 21:50.87
+46 Kaden Matthews JR West Carteret 21:55.85
+47 John Rasso FR Swansboro 22:03.66
+48 Henry Huber SR White Oak 23:02.42
+49 Jaden Ali SO Swansboro 23:06.86
+50 Jose Avalos Gonzalez JR South Lenoir 23:44.78
+51 Gabriel Bell FR Havelock 24:11.54
+52 Aiden Dean FR Jacksonville 24:36.06
+53 Harry Jiang FR West Carteret 24:47.11
+54 Andrew Clukey FR Richlands 25:40.72
+55 Andrew Christie FR Living Water Christian School 26:31.95
+56 Jason Gonzalez SO South Lenoir 27:14.98
+57 Dylan Lindsey SO FCA 27:36.04

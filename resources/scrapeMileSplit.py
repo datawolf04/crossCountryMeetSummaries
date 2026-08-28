@@ -79,6 +79,6 @@ class scrapeMileSplit:
 if __name__ == "__main__":
     from datetime import date
 
-    testURL = 'https://nc.milesplit.com/meets/687737-light-up-the-night-2025/results'
+    testURL = 'https://nc.milesplit.com/meets/744190-fightertown-xc-invitational-2026/results?type=formatted'
     tstMeetDate = date(2025, 8, 16)
     tst = scrapeMileSplit(testURL, tstMeetDate) 

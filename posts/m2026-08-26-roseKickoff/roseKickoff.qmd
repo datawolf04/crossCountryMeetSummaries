@@ -1,0 +1,69 @@
+---
+title: "JH Rose Kickoff"
+description: ""
+date: "08/26/2026"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('roseKickoff26.xlsx', sheet='boys5000') |> 
+  rename_with(~ str_to_title(.x)) 
+girlsVarsity <- read_excel('roseKickoff26.xlsx', sheet='girls5000') |> 
+  rename_with(~ str_to_title(.x)) 
+```
+
+## Competition summary
+The course was flat and a bit wet from the rain that came through the day before. The meet was moved to the afternoon, due to the weather. Jacksonville and White Oak were the only teams from our league that we saw here.
+
+### D.H. Conley Athlete times
+Varsity athletes
+```{r}
+buildTeamTable(boysVarsity, "DHC", maxAth=14)
+buildTeamTable(girlsVarsity, "Conley", maxAth=9)
+```
+
+
+To help the freshmen ramp up, we had a few of our better runners who are freshmen run the JV race.
+
+### Boys
+```{r}
+scoreMeetSimp(boysVarsity, "Rose Kickoff Boys")
+```
+
+```{r}
+#| fig-height: 5
+mpp(boysVarsity, "Rose Kickoff Boys")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(boysVarsity, "Rose Kickoff Boys")
+```
+
+### Girls
+```{r}
+scoreMeetSimp(girlsVarsity, "Rose Kickoff Girls")
+```
+
+```{r}
+#| fig-height: 5
+mpp(girlsVarsity, "Rose Kickoff Girls")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(girlsVarsity, "Rose Kickoff Girls")
+```

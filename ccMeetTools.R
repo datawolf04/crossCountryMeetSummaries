@@ -132,6 +132,33 @@ scoreMeet <- function(results, meetID, meetGender, meetLevel,nScore = 5, nVarsit
   return(teamResults)
 }
 
+scoreMeetSimp <- function(results, tableTitle, nScore = 5, nVarsity = 7){
+  teams <- getScoringTeams(results)
+  teamScore <- numeric(length(teams))
+  placements <- character(length(teams))
+  scorers <- results |> getScorers(minScoring = nScore, maxScoring = nVarsity)
+
+  for(i in seq_along(teams)){
+    tm <- teams[i]
+    teamPlaces <- scorers |> filter(Team == tm) |> select(Place) |> deframe()
+    placements[i] <- paste(teamPlaces, collapse= ", ")
+    scoredPlaces <- scorers |> filter(Team == tm) |> select(Place) |> deframe()
+
+    teamScore[i] <- ifelse(length(teamPlaces) >= 5, calcTeamScore(scoredPlaces),
+      ifelse(length(teamPlaces) > 0,"DNS", "NONE"))
+  }
+  teamResults <- data.frame(teams, placements, teamScore) |> arrange(teamScore) |> 
+    gt_cc_table() |>
+    tab_header(title = tableTitle) |> 
+    cols_label(
+      teams = "Teams",
+      placements = "Athlete Placements",
+      teamScore = "Team Score"
+    ) 
+  return(teamResults)
+}
+
+
 makePlacePlot <- function(results, meetID, meetGender, meetLevel){
   meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> 
     str_replace(" Xc ", " XC ") |> str_replace("Bcc", "BCC")
@@ -157,6 +184,76 @@ makeTimePlot <- function(results, meetID, meetGender, meetLevel){
   meetTitle <- meetID |> str_replace_all('-', ' ') |> str_to_title() |> 
     str_replace(" Xc ", " XC ") |> str_replace("Bcc", "BCC")
   pltTitle = paste(meetTitle, meetGender, meetLevel)
+  pltTitle = paste(pltTitle, "Team times")
+  teamRes = buildTeamResults(results = results) |> select(Team, Label)
+  results <- results |> left_join(teamRes, by='Team') |> 
+    mutate(Team = Label) |> select(-Label) 
+  results <- results |> 
+    mutate(Team = factor(results$Team, levels = teamRes$Label))
+
+  p1 <- ggplot(results, aes(x=Time,y=Team,color=Team)) + 
+    geom_point(size = 2) + guides(color = "none") + 
+    scale_y_discrete(
+      limits=rev
+    ) +
+    theme_minimal() + labs(
+      title = pltTitle,
+      subtitle = "Varsity times by team",
+      x = "",
+      y = ""
+    ) + 
+    theme( plot.title.position = "plot", plot.subtitle = element_text(hjust = 0.5) ) +
+    scale_x_time(labels = \(x) format(as_datetime(x, tz = "UTC"), "%M:%S"))
+
+  medTime = median(results$Time)
+  maxDensity = max(density(results$Time)$y)
+  medTimeStr = format(as_datetime(medTime, tz = "UTC"), "%M:%OS2")
+  p2 <- ggplot(results, aes(x=Time)) + geom_density(fill = "skyblue", alpha = 0.25) +
+    geom_vline(xintercept=medTime, linetype = "dashed", color='blue',linewidth=0.5) +
+    theme_minimal() + scale_y_continuous(labels=NULL) +
+    theme( 
+      plot.title.position = "plot", 
+      plot.subtitle = element_text(hjust = 0.2),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank()
+  ) +
+    labs(
+      y="",
+      subtitle = "Time distribution for all varsity athletes" 
+    ) +
+    annotate("text", x = medTime+60, y = maxDensity*0.9, hjust = 0,
+      label = paste("Median:",medTimeStr), color = 'blue', size= 3) +
+    scale_x_time(labels = \(x) format(as_datetime(x, tz = "UTC"), "%M:%S")) 
+  
+  g1 <- ggplotGrob(p1)
+  g2 <- ggplotGrob(p2)
+  g <- rbind(g1, g2, size = "first")
+  panel_rows <- unique(g$layout[g$layout$name == "panel", "t"])
+  g$heights[panel_rows] <- unit(c(5, 1), "null")
+  grid.newpage()
+  
+  return(grid.draw(g))
+}
+
+mpp <- function(results, pltTitle){
+  teamRes = buildTeamResults(results = results) |> select(Team, Label)
+  results <- results |> left_join(teamRes, by='Team') |> 
+    mutate(Team = Label) |> select(-Label) 
+  results <- results |> 
+    mutate(
+      Team = factor(results$Team, levels = teamRes$Label),
+      Place = as.integer(Place)
+    )
+
+  ggplot(results, aes(x=Place,y=Team,color=Team)) + 
+    geom_point(size=2) + guides(color = "none") + 
+    scale_y_discrete(limits=rev) +
+    theme_minimal() + theme(axis.title.y = element_blank()) +
+    ggtitle(pltTitle) + xlab("Place in race")
+}
+
+
+mtp <- function(results, pltTitle){
   pltTitle = paste(pltTitle, "Team times")
   teamRes = buildTeamResults(results = results) |> select(Team, Label)
   results <- results |> left_join(teamRes, by='Team') |> 

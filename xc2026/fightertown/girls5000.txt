@@ -1,0 +1,71 @@
+PLACE ATHLETE TEAM MARK POINTS
+1 Ella Richardson JR Croatan 20:53.52
+2 Mia Ramirez Padilla SO Swansboro 21:37.59 1
+3 Lillie Hemby SO West Carteret 21:44.16 2
+4 Emma Sanders SR Swansboro 21:54.53 3
+5 Elise Rose JR West Carteret 22:11.72 4
+6 Samantha Andreu SR D.H. Conley 22:16.94 5
+7 Lucy Sherrill SO D.H. Conley 22:22.04 6
+8 Blake Leigh Brickhouse JR West Carteret 22:49.43 7
+9 Zoe Fisher SO Swansboro 23:00.18 8
+10 Leah Windsor SO West Carteret 23:06.08 9
+11 Maggie Harding SR White Oak 23:07.25
+12 Marina Lewis SR Havelock 23:09.31 10
+13 Jacky Esquivel JR White Oak 23:21.41
+14 Annabella Drake SO White Oak 23:27.95
+15 Robbie Brownd SO Swansboro 23:32.26 11
+16 Valeria Ramos Gutierrez SR South Lenoir 23:35.17 12
+17 Jade Lanclos JR Living Water Christian School 23:52.85 13
+18 Sydney-Paige Poole SO Croatan 23:53.81
+19 Adaleigh Potts SO Jacksonville 23:54.86
+20 Alexa Haro SR South Lenoir 23:59.36 14
+21 Isla Weiman FR Pamlico County 24:15.00 15
+22 Jada Lanclos SR Living Water Christian School 24:29.03 16
+23 Alaina Vee JR Swansboro 24:29.62 17
+24 Eva Hegger SR Onslow Early College High School 24:30.60 18
+25 Elli Stallard JR Onslow Early College High School 24:36.37 19
+26 Aleah Russell FR D.H. Conley 24:46.05 20
+27 Jessica Pichardo-Madrid JR Pamlico County 25:15.18 21
+28 Isabelle Hare JR Onslow Early College High School 25:19.17 22
+29 Kathryn Bauman SO West Carteret 25:21.74 23
+30 Eve Smith SO Havelock 25:29.75 24
+31 Gillam Parker SR West Carteret 25:41.64 25
+32 Zarhia O'nan JR Havelock 25:43.67 26
+33 Addison Gercon SO West Carteret 25:48.28 27
+34 Emma Justice FR Swansboro 25:50.88 28
+35 Callie Broadwell FR West Carteret 25:53.13
+36 Brooke Wilson SR East Carteret 26:01.40
+37 Kaylie Martinez FR West Carteret 26:10.06
+38 Cailyn Thomas JR Living Water Christian School 26:18.62 29
+39 Chloe Dean SO Jacksonville 26:33.69
+40 Cora Stern JR FCA 27:06.82
+41 Evelyn Garcia SO South Lenoir 27:11.30 30
+42 Cianna Gempler JR Living Water Christian School 27:23.03 31
+43 Nicol Romero-Gonzalez JR White Oak 27:44.99
+44 Esther Hagedorn JR Onslow Early College High School 27:51.21 32
+45 Clio Dunmire JR West Carteret 27:54.25
+46 Lia Otto JR Swansboro 28:22.49 33
+47 Carley O'Brien SR D.H. Conley 28:28.57 34
+48 Alianna Paterson SR Havelock 29:09.88 35
+49 Francesca Karp FR Pamlico County 29:33.08 36
+50 Chloe Locklear SO D.H. Conley 29:36.29 37
+51 Dayana Lugo-Ramos FR Pamlico County 30:02.15 38
+52 Ishajaleah Thomas SO Havelock 30:05.33 39
+53 Olivia Nguyen SO Living Water Christian School 30:08.71 40
+54 Skyler Russell SR Onslow Early College High School 30:22.80 41
+55 Ariella Gurganus FR Living Water Christian School 30:29.32 42
+56 Valerie Valdivia SO South Lenoir 30:50.32 43
+57 Kadence Thigpen SR South Lenoir 31:36.86 44
+58 Natalee Little FR Wilson Christian Academy 31:42.83
+59 Annie Delamar SO Pamlico County 31:47.12 45
+60 Kaylee Foster JR Living Water Christian School 32:30.02 46
+61 Danika Keith JR Onslow Early College High School 33:36.67 47
+62 Kiera Slomski SO Onslow Early College High School 34:00.93 48
+63 Anastacia Papastrat SO Richlands 34:11.08
+64 Adelaide Fisher FR Wilson Christian Academy 34:43.58
+65 Sydney Dew FR Wilson Christian Academy 34:52.42
+66 Cianna Gempler JR Living Water Christian School 35:27.36
+67 Elena De Paz -Ayala SR South Lenoir 37:16.20 49
+68 Piper Stone SO Pamlico County 38:35.68 50
+69 Hailey King FR Living Water Christian School 39:55.25
+70 Morgan Blaebaum FR Pamlico County 41:00.24 51

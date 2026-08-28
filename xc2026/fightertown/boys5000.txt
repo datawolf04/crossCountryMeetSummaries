@@ -1,0 +1,119 @@
+PLACE ATHLETE TEAM MARK POINTS
+1 Cameron Bitts JR Havelock 15:57.93 1
+2 Avery Roberson SR Northside (1A) 16:16.49 2
+3 Zach Guerrero JR Croatan 16:39.56 3
+4 Lawrence Cole SR West Carteret 16:50.42 4
+5 Miller Roberts JR West Carteret 16:53.52 5
+6 Noah Velueta JR West Carteret 16:58.41 6
+7 Michael Justice SR Swansboro 17:05.82 7
+8 Atticus Brinson SR Croatan 17:27.71 8
+9 Evan Quigley JR Croatan 17:32.49 9
+10 Edgar Muro JR Pamlico County 17:36.20 10
+11 Rudy Flores SO Jacksonville 17:43.39 11
+12 Ethan Hughes SR Croatan 17:48.53 12
+13 Jake Huston SO Croatan 17:49.81 13
+14 Maddox Trossen SR Swansboro 17:54.90 14
+15 Tayquan Alston SR Rocky Mount 17:55.92 15
+16 Tucker Carey JR Pamlico County 18:05.03 16
+17 Alex Penny JR East Carteret 18:09.33
+18 Wesley Vernon SR South Lenoir 18:12.40 17
+19 Francisco Herrera SR White Oak 18:15.14 18
+20 Tyler Wilkinson SO D.H. Conley 18:36.42 19
+21 Riley Treacy JR Pamlico County 18:38.92 20
+22 Jack Rouse SR South Lenoir 18:40.99 21
+23 River Cox SO Havelock 18:42.41 22
+24 Caleb Gillen SR Wilson Christian Academy 18:42.68
+25 Jake McDonald SR Epiphany School 18:44.33 23
+26 Zyon Howard FR Rocky Mount 18:50.49 24
+27 Luis Gandarilla-Gomez SR West Carteret 18:52.59 25
+28 Ronald Perez FR Swansboro 18:58.87 26
+29 Sam Mathes SO Northside (1A) 19:00.51 27
+30 Mason Foreman SO Pamlico County 19:00.85 28
+31 Isaac Dupuis FR Jacksonville 19:01.28 29
+32 Kaivion Jones SO Pamlico County 19:01.65 30
+33 Jack Cohick SR Northside (1A) 19:03.26 31
+34 Reid Smith SO Pamlico County 19:07.95 32
+35 Blake Wainwright SR Northside (1A) 19:10.14 33
+36 Jack Johan FR Croatan 19:12.83 34
+37 Luke Mirabella SR Northside (1A) 19:13.25 35
+38 Yael Ramirez-Rico JR South Lenoir 19:22.96 36
+39 Brant Atkinson JR West Carteret 19:24.82 37
+40 Christian Lewis JR West Carteret 19:30.04 38
+41 Austin Watts SO White Oak 19:30.73 39
+42 Odin Dunmire SO West Carteret 19:33.37 40
+43 David Wolf JR D.H. Conley 19:38.92 41
+44 Raleigh Holden 8 FCA 19:42.28
+45 Nathan Lawrence SO West Carteret 19:43.44
+46 Roy Archer SR Jacksonville 19:45.96 42
+47 William Arce JR Northside (1A) 20:04.42 43
+48 Gavin Reynolds SO Jacksonville 20:11.20 44
+49 Deavonie Best SO Pamlico County 20:16.21 45
+50 Colin Jones SO West Carteret 20:25.02
+51 Aiden Osburn SR D.H. Conley 20:31.92 46
+52 Bradley Birchfield SO Havelock 20:37.58 47
+53 Ayden Bell FR Pamlico County 20:42.10
+54 Thomas Hood 8 Living Water Christian School 20:46.56 48
+55 Carlos Marte Burgos SR South Lenoir 20:47.53 49
+56 Liam Le SO West Carteret 20:50.34
+57 Aaron Beltran FR Pamlico County 20:54.44
+58 Alex Taylor SO Epiphany School 20:58.85 50
+59 Noah Hanna SR White Oak 21:10.74 51
+60 Jax Dennis JR Havelock 21:18.62 52
+61 Finn Gardner FR Swansboro 21:21.75 53
+62 Aaron Vanerbeck 8 FCA 21:23.11
+63 Cale Roberts FR South Lenoir 21:23.92 54
+64 Keanu Bauer FR Onslow Early College High School 21:29.76 55
+65 William Rossbach SO Havelock 21:31.40 56
+66 Axle Maxwell JR Onslow Early College High School 21:32.61 57
+67 George Mendoza SO D.H. Conley 21:36.34 58
+68 Noah Rykhus SO Havelock 21:37.37 59
+69 David Kang JR Rocky Mount 21:37.73 60
+70 Silas Rigsbee SR South Lenoir 21:43.19 61
+71 Bradley Jackson SO Havelock 21:46.72 62
+72 Alex James JR Living Water Christian School 21:53.42 63
+73 Malachi Powell FR Croatan 21:53.76 64
+74 Noah Windley SR D.H. Conley 21:56.58 65
+75 Anthony Fliegel SO White Oak 22:05.86 66
+76 Brayden McClendon SO Living Water Christian School 22:07.01 67
+77 Weston Kenner JR Epiphany School 22:07.69 68
+78 James Miller SR South Lenoir 22:10.36 69
+79 Cheyton Olin FR White Oak 22:13.25 70
+80 Nolan Mattison SR White Oak 22:15.48 71
+81 Kayden Bryant SO Rocky Mount 22:21.78 72
+82 Hayden Smith JR White Oak 22:25.77 73
+83 Jay Goemaat SO Swansboro 22:27.17 74
+84 Samuel Mullis JR Northside (1A) 22:27.69 75
+85 Noah Bryant SR Rocky Mount 22:28.26 76
+86 Ralph Rains SR Living Water Christian School 22:37.14 77
+87 Matthew Fox FR FCA 22:48.12
+88 Owen Jones FR South Lenoir 23:15.43
+89 Parker Beanmon JR Rocky Mount 23:22.12 78
+90 Cayden Rouse JR D.H. Conley 23:26.17 79
+91 Nathan Coughlin SO Epiphany School 23:33.23 80
+92 Adam Garcia SR South Lenoir 23:37.69
+93 Reeves Larsen SO Onslow Early College High School 23:50.26 81
+94 Cayton Boucher SO D.H. Conley 23:52.90 82
+95 Joseph Stiles FR Providence Preparatory Academy High School 23:56.52
+96 Remi Richards SO D.H. Conley 23:59.41
+97 Bryce Keith SO Living Water Christian School 24:08.35 83
+98 Taliv Walker FR Rocky Mount 24:12.54 84
+99 Chandler Fontaine JR Onslow Early College High School 24:13.20 85
+100 Derick Wilson Rosario SO Richlands 24:13.65 86
+101 Noah Marrquin SR Jacksonville 24:16.68 87
+102 Nevan Hanscom SO Living Water Christian School 24:25.82 88
+103 Holden Kenner SO Epiphany School 25:24.45 89
+104 Jon Passero SO Richlands 25:36.52 90
+105 Liam Cetinkaya JR Onslow Early College High School 25:40.14 91
+106 Marion Rains JR Living Water Christian School 25:58.75 92
+107 Luke Staroslsky JR Living Water Christian School 26:27.71
+108 Liam Triplett SO Providence Preparatory Academy High School 26:52.02
+109 Parker Bailey SO Living Water Christian School 27:02.64
+110 Thor Oftedal SO Living Water Christian School 27:04.36
+111 Joshua Moon SR Swansboro 28:03.57 93
+112 Jhasiyah McKoy JR Pamlico County 28:15.29
+113 Ethan LaFave JR Living Water Christian School 28:25.12
+114 Landon Norman JR D.H. Conley 28:25.65
+115 Christian Smith FR Rocky Mount 28:53.66
+116 Chase Rager SO Richlands 30:37.24 94
+117 Trevor Stankiewicz FR Richlands 33:58.61 95
+118 Samuel Lancaster FR Richlands 34:51.41 96

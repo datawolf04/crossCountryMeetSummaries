@@ -1,0 +1,76 @@
+---
+title: "Fightertown Invitational"
+description: "First 5K of the season."
+date: "08/22/2026"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('fightertown26.xlsx', sheet='boys5000') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+girlsVarsity <- read_excel('fightertown26.xlsx', sheet='girls5000') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+boysJV <- read_excel('fightertown26.xlsx', sheet='boys4000') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+```
+
+## Competition summary
+The course was flat and a bit wet from the rain that came through the day before. The meet was moved to the afternoon, due to the weather. Jacksonville and White Oak were the only teams from our league that we saw here.
+
+### D.H. Conley Athlete times
+Varsity athletes
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley", maxAth=9)
+buildTeamTable(girlsVarsity, "D.H. Conley")
+```
+
+The JV athletes ran a 4000m race.
+
+```{r}
+buildTeamTable(boysJV, 'D.H. Conley')
+```
+
+To help the freshmen ramp up, we had a few of our better runners who are freshmen run the JV race.
+
+### Boys
+```{r}
+scoreMeetSimp(boysVarsity, "Fightertown Boys Varsity")
+```
+
+```{r}
+#| fig-height: 5
+mpp(boysVarsity, "Fightertown Boys Varsity")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(boysVarsity, "Fightertown Boys Varsity")
+```
+
+### Girls
+```{r}
+scoreMeetSimp(girlsVarsity, "Fightertown Girls Varsity")
+```
+
+```{r}
+#| fig-height: 5
+mpp(girlsVarsity, "Fightertown Girls Varsity")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(girlsVarsity, "Fightertown Girls Varsity")
+```
