@@ -26,7 +26,7 @@ girlsVarsity <- read_excel('roseKickoff26.xlsx', sheet='girls5000') |>
 ```
 
 ## Competition summary
-The course was flat and a bit wet from the rain that came through the day before. The meet was moved to the afternoon, due to the weather. Jacksonville and White Oak were the only teams from our league that we saw here.
+Boyd Lee was in good condition, although it was definitely late-August hot. New Bern, Rose, and South Central were other teams from our league.
 
 ### D.H. Conley Athlete times
 Varsity athletes
@@ -34,9 +34,6 @@ Varsity athletes
 buildTeamTable(boysVarsity, "DHC", maxAth=14)
 buildTeamTable(girlsVarsity, "Conley", maxAth=9)
 ```
-
-
-To help the freshmen ramp up, we had a few of our better runners who are freshmen run the JV race.
 
 ### Boys
 ```{r}
