@@ -1,0 +1,68 @@
+---
+title: "BCC Jamboree"
+description: "BCC All Teams at New Bern"
+date: "09/09/2026"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('bccJamboree0909.xlsx', sheet='boys5000') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+girlsVarsity <- read_excel('bccJamboree0909.xlsx', sheet='girls5000') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+```
+
+## Competition summary
+New Bern changed the course from previous seasons to make it a full 5K. So times compared to last year should be somewhat slower, but more realistic for a 5K.
+
+### D.H. Conley Athlete times
+
+```{r}
+buildTeamTable(boysVarsity, "D. H. Conley", maxAth=12)
+buildTeamTable(girlsVarsity, "D. H. Conley", maxAth=10)
+```
+
+The grouping is good, but the times need to drop.
+
+### Boys
+```{r}
+scoreMeetSimp(boysVarsity, "BCC Jamboree at New Bern")
+```
+
+```{r}
+#| fig-height: 5
+mpp(boysVarsity, "BCC Jamboree at New Bern")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(getVarsityRunners(boysVarsity), "BCC Jamboree at New Bern")
+```
+
+### Girls
+```{r}
+scoreMeetSimp(girlsVarsity, "BCC Jamboree at New Bern")
+```
+
+```{r}
+#| fig-height: 5
+mpp(girlsVarsity, "BCC Jamboree at New Bern")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(getVarsityRunners(girlsVarsity), "BCC Jamboree at New Bern")
+```

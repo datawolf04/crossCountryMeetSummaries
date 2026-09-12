@@ -55,14 +55,14 @@ getVarsityRunners <- function(results, nVarsity = 7){
   for(i in 2:nrow(teamSummary)){
     thisTeam <- teamSummary$Team[i]
     thisCount <- teamSummary$count[i]
-    thisTeamRes <- results |> filter(Team == thisTeam) |> arrange(Time)
+    thisTeamRes <- results |> filter(Team == thisTeam) |> arrange(Place)
     if(thisCount > nVarsity){
       thisTeamRes <- thisTeamRes[1:nVarsity, ]
     }
     varsityResults <- bind_rows(list(varsityResults, thisTeamRes))
   }
 
-  varsityResults <- varsityResults |> arrange(Time) |> 
+  varsityResults <- varsityResults |> arrange(Place) |> 
     mutate(Place = row_number())
   return(varsityResults)
 }
