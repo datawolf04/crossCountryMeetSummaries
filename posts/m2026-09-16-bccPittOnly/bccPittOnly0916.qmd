@@ -1,0 +1,68 @@
+---
+title: "BCC Pitt Only"
+description: "BCC Pitt County Teams at Boyd Lee"
+date: "09/16/2026"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('bcc0916.xlsx', sheet='boysVarsity') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+girlsVarsity <- read_excel('bcc0916.xlsx', sheet='girlsVarsity') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+```
+
+## Competition summary
+The weather was warm, but there was a gentle breeze.
+
+### D.H. Conley Athlete times
+
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley", maxAth=12)
+buildTeamTable(girlsVarsity, "D.H. Conley", maxAth=8)
+```
+
+Welcome to the sub-20 club LJ!
+
+### Boys
+```{r}
+scoreMeetSimp(boysVarsity, "BCC Pitt County Teams at Boyd Lee")
+```
+
+```{r}
+#| fig-height: 5
+mpp(boysVarsity, "BCC Pitt County Teams at Boyd Lee")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(boysVarsity, "BCC Pitt County Teams at Boyd Lee")
+```
+
+### Girls
+```{r}
+scoreMeetSimp(girlsVarsity, "BCC Pitt County Teams at Boyd Lee")
+```
+
+```{r}
+#| fig-height: 5
+mpp(girlsVarsity, "BCC Pitt County Teams at Boyd Lee")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(girlsVarsity, "BCC Pitt County Teams at Boyd Lee")
+```

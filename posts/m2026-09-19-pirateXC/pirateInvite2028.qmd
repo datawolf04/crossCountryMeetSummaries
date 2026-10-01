@@ -1,0 +1,67 @@
+---
+title: "Pirate Invite"
+description: "The Pirate Invitational at the North Recreation Complex at ECU"
+date: "09/19/2026"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('pirateInvite2026.xlsx', sheet='boysVarsity') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+girlsVarsity <- read_excel('pirateInvite2026.xlsx', sheet='girlsVarsity') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+```
+
+## Competition summary
+This appears to be a 3 mile course, rather than a 5k. The weather was cooler, but still very humid.
+
+### D.H. Conley Athlete times
+
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley", maxAth=11)
+buildTeamTable(girlsVarsity, "D.H. Conley", maxAth=6)
+```
+
+
+### Boys
+```{r}
+scoreMeetSimp(boysVarsity, "2026 Pirate Invite")
+```
+
+```{r}
+#| fig-height: 5
+mpp(boysVarsity, "2026 Pirate Invite")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(boysVarsity, "2026 Pirate Invite")
+```
+
+### Girls
+```{r}
+scoreMeetSimp(girlsVarsity, "2026 Pirate Invite")
+```
+
+```{r}
+#| fig-height: 5
+mpp(girlsVarsity, "2026 Pirate Invite")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(girlsVarsity, "2026 Pirate Invite")
+```

@@ -1,0 +1,115 @@
+Place Name Team Time
+1 Zach Guerrero Croatan 15:25.3
+2 Cameron Bitts Havelock 15:46.2
+3 Atticus Brinson Croatan 16:27.6
+4 Leo Drust Northwood 16:32.3
+5 Noah Davis Camden County 16:32.9
+6 Evan Quigley Croatan 16:59.6
+7 Lucas Feehrer Wakefield 17:02.4
+8 Judah Spellman Croatan 17:14.4
+9 Ivan Gonzalez South Johnston 17:21.6
+10 Jake Huston Croatan 17:22.5
+11 Liam Patterson Northwood 17:23.4
+12 Tanner Gilchrist Northwood 17:30.0
+13 William Arce Northside (1A) 17:32.3
+14 Micah McKinney Christ Covenant School 17:35.5
+15 Chase Murphy Croatan 17:45.4
+16 Wesley Vernon South Lenoir 17:46.0
+17 Jeremy Serrano South Johnston 17:46.5
+18 Luke Mirabella Northside (1A) 17:47.2
+19 Ben Robinson Croatan 17:50.3
+20 Tyler Wilkinson D.H. Conley 17:52.6
+21 Drew Yell Northwood 17:55.1
+22 Landon Taylor Croatan 17:56.3
+23 Jack Rouse South Lenoir 17:57.2
+24 Carter Ewell Terra Ceia Christian School 18:02.8
+25 River Cox Havelock 18:04.7
+26 Tanner Carawan Terra Ceia Christian School 18:15.8
+27 Landen Johnson Hunt High School 18:26.4
+28 Dominic DiPasqua Havelock 18:33.5
+29 Yael Ramirez-Rico South Lenoir 18:40.0
+30 Ethan Copeland Martin County High School 18:44.3
+31 Lawson Holland Terra Ceia Christian School 18:47.4
+32 John Mauze Hunt High School 18:48.4
+33 Mac Hawkins Croatan 18:57.3
+34 Ethan Senarathne D.H. Conley 18:59.0
+35 Brayden Kirk Wakefield 19:00.3
+36 Liam Bradley Northwood 19:09.0
+37 Jamarion Henderson South Central 19:09.2
+38 Colten Smith Northside (1A) 19:15.0
+39 George Mendoza D.H. Conley 19:19.3
+40 Cale Roberts South Lenoir 19:25.2
+41 Luis Hernadez-Schwartz Wakefield 19:25.4
+42 Brayden Berry Havelock 19:31.0
+43 Coby Alligood Terra Ceia Christian School 19:32.5
+44 Tyler Mundell North Pitt 19:37.9
+45 Squires Tunstall Terra Ceia Christian School 19:41.2
+46 Brayden Burdette Pitt County Pacers 19:41.3
+47 Jonathan Mills D.H. Conley 19:43.5
+48 Noah Rykhus Havelock 19:49.9
+49 Bradley Birchfield Havelock 19:50.7
+50 Eduardo Aparicio Hernandez South Johnston 19:55.5
+51 Elan Lipton South Johnston 19:56.9
+52 Gray Elks North Pitt 19:58.1
+53 Izak Carben Havelock 19:58.3
+54 William Rossbach Havelock 20:11.9
+55 Roman George Hunt High School 20:13.2
+56 Adam Garcia South Lenoir 20:23.0
+57 John Jones South Lenoir 20:25.1
+58 Silas Rigsbee South Lenoir 20:25.7
+59 Bradley Jackson Havelock 20:29.2
+60 Jax Dennis Havelock 20:33.0
+61 Jacob Horne Rolesville High School 20:35.6
+62 Taj Stokes Rolesville High School 20:36.3
+63 Dilan Gomez-Juarez South Lenoir 20:36.7
+64 Jackson Howard Northside (1A) 20:37.3
+65 Andres Real North Pitt 20:46.1
+66 David Wolf D.H. Conley 20:48.2
+67 Alfredo Limon Howard South Lenoir 20:48.7
+68 Brantley Vernon Pitt County Pacers 20:49.1
+69 Chase Wineland Rolesville High School 20:54.0
+70 Florentino Martinez North Pitt 21:00.2
+71 Oakley Steele Havelock 21:02.6
+72 Blake Collie Pitt County Pacers 21:11.6
+73 Aiden Osburn D.H. Conley 21:15.8
+74 Eli Nichols Hunt High School 21:18.4
+75 Landon Blalock Hunt High School 21:25.6
+76 Cael Brock Hunt High School 21:26.0
+77 Bryan Martinez South Johnston 21:27.0
+78 Malik Hill North Pitt 21:38.6
+79 Cody O'Neal South Johnston 21:46.3
+80 Brayden Windley Pitt County Pacers 22:00.7
+81 Patrick Driscoll Havelock 22:05.8
+82 Braylen Hall Hunt High School 22:18.2
+83 Remi Richards D.H. Conley 22:21.9
+84 Juan Sanchez Northwood 22:25.6
+85 Ian Gorsuch Havelock 22:30.1
+86 Grant Mallady Havelock 22:36.4
+87 Matthew Riverbank D.H. Conley 22:53.8
+88 Kevin Bullock Martin County High School 23:04.9
+89 Samuel Mullis Northside (1A) 23:19.3
+90 River Gray Northwood 23:20.8
+91 Dominic Howell Havelock 23:39.1
+92 Evan Shelby Pitt County Pacers 23:47.4
+93 Miller Robinson Northside (1A) 23:50.8
+94 Cayden Rouse D.H. Conley 23:53.3
+95 William Anjal Havelock 24:06.4
+96 Atlee DiTucci Pitt County Pacers 24:09.2
+97 Tristan Smith Havelock 24:52.4
+98 Collin Craig Northside (1A) 25:38.0
+99 Charles Ingram Havelock 25:39.5
+100 Wesley Stowe Terra Ceia Christian School 25:40.9
+101 Ben Cross Martin County High School 25:59.4
+102 Messyah Northern Martin County High School 27:37.0
+103 Connor Doyle Havelock 27:42.5
+104 Jackson Parrish D.H. Conley 28:22.2
+105 Landon Norman D.H. Conley 28:48.0
+106 Juan Rodriguez Albortante Martin County High School 29:22.7
+107 Gabriel Bell Havelock 29:36.8
+108 Ben Saunders Pitt County Pacers 30:05.2
+109 Austin Vandenbussche Pitt County Pacers 31:50.6
+110 Joey Chen Pitt County Pacers 32:34.1
+111 Charlie Byers Pitt County Pacers 33:28.2
+112 Solomon Buchanan Pitt County Pacers 33:50.9
+113 Caedmon Kirkland Pitt County Pacers 41:27.7
+114 Michael Callaro, JR Pitt County Pacers 41:34.7
