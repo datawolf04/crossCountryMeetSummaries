@@ -1,0 +1,72 @@
+---
+title: "Bo Run"
+description: "The Bo Run at Boyd Lee Park"
+date: "09/26/2026"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('boRun2026.xlsx', sheet='boysVarsity') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+boysJV <- read_excel('boRun2026.xlsx', sheet='boysJV') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+girlsVarsity <- read_excel('boRun2026.xlsx', sheet='girlsVarsity') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+```
+
+## Competition summary
+After a few weeks of heaters, the weather broke and we had a cool day. The course was running fast, and there were LOTS of PRs
+
+### D.H. Conley Athlete times
+
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley", maxAth=8)
+buildTeamTable(boysJV, "D.H. Conley", maxAth=5)
+buildTeamTable(girlsVarsity, "D.H. Conley", maxAth=5)
+```
+
+Welcome to the sub-18 club Tyler! And welcome to the sub-19 club Aion, LJ, David, and George!
+
+### Boys
+```{r}
+scoreMeetSimp(boysVarsity, "2026 Bo Run")
+```
+
+```{r}
+#| fig-height: 5
+mpp(boysVarsity, "2026 Bo Run")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(boysVarsity, "2026 Bo Run")
+```
+
+
+### Girls
+```{r}
+scoreMeetSimp(girlsVarsity, "2026 Bo Run")
+```
+
+```{r}
+#| fig-height: 5
+mpp(girlsVarsity, "2026 Bo Run")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(girlsVarsity, "2026 Bo Run")
+```
