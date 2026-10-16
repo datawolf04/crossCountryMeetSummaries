@@ -1,0 +1,70 @@
+---
+title: "Great American XC Festival"
+description: "This is one of the largest and most competitive meets in the country"
+date: "10/03/2026"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('greatAmerican2026.xlsx', sheet='boysBlue') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+boysJV <- read_excel('greatAmerican2026.xlsx', sheet='boysJV') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+girlsVarsity <- read_excel('greatAmerican2026.xlsx', sheet='girlsBlue') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+```
+
+## Competition summary
+Great American is a huge meet. Conley had athletes in the Blue Division and in the Boys JV race.
+
+### D.H. Conley Athlete times
+
+```{r}
+buildTeamTable(boysVarsity, "D.H. Conley", maxAth=7)
+buildTeamTable(boysJV, "D.H. Conley", maxAth=5)
+buildTeamTable(girlsVarsity, "D.H. Conley", maxAth=5)
+```
+
+
+### Boys
+```{r}
+scoreMeetSimp(boysVarsity, "2026 Great American Blue")
+```
+
+```{r}
+#| fig-height: 8
+mpp(boysVarsity, "2026 Great American Blue")
+```
+
+```{r}
+#| fig-height: 8.5
+mtp(boysVarsity, "2026 Great American Blue")
+```
+
+### Girls
+```{r}
+scoreMeetSimp(girlsVarsity, "2026 Great American Blue")
+```
+
+```{r}
+#| fig-height: 9
+mpp(girlsVarsity, "2026 Great American Blue")
+```
+
+```{r}
+#| fig-height: 8.5
+mtp(girlsVarsity, "2026 Great American Blue")
+```
