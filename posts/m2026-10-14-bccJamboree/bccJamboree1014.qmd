@@ -1,6 +1,6 @@
 ---
 title: "BCC Jamboree"
-description: "Meet with all 6 teams before the final league meet."
+description: "Meet with all 6 teams before the final league meet at NE Creek Park."
 date: "10/14/2026"
 categories:
   - HighSchool
@@ -37,32 +37,32 @@ buildTeamTable(girlsVarsity, "D.H. Conley", maxAth=8)
 
 ### Boys
 ```{r}
-scoreMeetSimp(boysVarsity, "BCC Pitt County Teams at Boyd Lee")
+scoreMeetSimp(boysVarsity, "BCC Pitt County Teams at NE Creek Park")
 ```
 
 The Conley boys were down two of their top 5 runners (including #1), so the team score is a little rough.
 
 ```{r}
 #| fig-height: 5
-mpp(boysVarsity, "BCC Pitt County Teams at Boyd Lee")
+mpp(boysVarsity, "BCC Pitt County Teams at NE Creek Park")
 ```
 
 ```{r}
 #| fig-height: 6.5
-mtp(boysVarsity, "BCC Pitt County Teams at Boyd Lee")
+mtp(boysVarsity, "BCC Pitt County Teams at NE Creek Park")
 ```
 
 ### Girls
 ```{r}
-scoreMeetSimp(girlsVarsity, "BCC Pitt County Teams at Boyd Lee")
+scoreMeetSimp(girlsVarsity, "BCC Pitt County Teams at NE Creek Park")
 ```
 
 ```{r}
 #| fig-height: 5
-mpp(girlsVarsity, "BCC Pitt County Teams at Boyd Lee")
+mpp(girlsVarsity, "BCC Pitt County Teams at NE Creek Park")
 ```
 
 ```{r}
 #| fig-height: 6.5
-mtp(girlsVarsity, "BCC Pitt County Teams at Boyd Lee")
+mtp(girlsVarsity, "BCC Pitt County Teams at NE Creek Park")
 ```
