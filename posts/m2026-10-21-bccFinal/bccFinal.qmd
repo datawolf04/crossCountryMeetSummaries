@@ -1,0 +1,66 @@
+---
+title: "BCC Conference Meet"
+description: "Meet with all 6 teams before the final league meet at New Bern HS."
+date: "10/21/2026"
+categories:
+  - HighSchool
+format: 
+  html
+execute:
+    message: false
+    warning: false
+    echo: false
+---
+
+```{r}
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(readxl)
+
+source('../../ccMeetTools.R')
+boysVarsity <- read_excel('bccFinal.xlsx', sheet='boys5000') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+girlsVarsity <- read_excel('bccFinal.xlsx', sheet='girls5000') |> 
+  rename_with(~ str_to_title(.x)) |> rename(Time = Time_seconds)
+```
+
+## Competition summary
+The weather was cool. It was about 70 degrees at the start.
+
+### D.H. Conley Athlete times
+Only the varsity races were on Milesplit, so that's who I will report times for here.
+```{r}
+buildTeamTable(boysVarsity, "D. H. Conley", maxAth=7)
+buildTeamTable(girlsVarsity, "D. H. Conley", maxAth=7)
+```
+
+### Boys
+```{r}
+scoreMeetSimp(boysVarsity, "BCC Pitt County Teams at New Bern HS")
+```
+
+```{r}
+#| fig-height: 5
+mpp(boysVarsity, "BCC Pitt County Teams at New Bern HS")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(boysVarsity, "BCC Pitt County Teams at New Bern HS")
+```
+
+### Girls
+```{r}
+scoreMeetSimp(girlsVarsity, "BCC Pitt County Teams at New Bern HS")
+```
+
+```{r}
+#| fig-height: 5
+mpp(girlsVarsity, "BCC Pitt County Teams at New Bern HS")
+```
+
+```{r}
+#| fig-height: 6.5
+mtp(girlsVarsity, "BCC Pitt County Teams at New Bern HS")
+```
